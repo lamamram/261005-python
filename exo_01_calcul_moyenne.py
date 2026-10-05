@@ -17,3 +17,22 @@ valeurs = valeurs.split(",")
 
 # %% -------------------------- boucle for -----------------------------------
 
+valeurs_converties = []
+for valeur in valeurs:
+    valeur = valeur.strip()
+#     if valeur.isnumeric() or ( valeur[0] == "-" ):
+    # positif             OU  négatif: commence par - ET le reste est numérique
+    if valeur.isnumeric() or ( valeur.startswith("-") and valeur[1:].isnumeric() ):
+        valeurs_converties.append(int(valeur))
+    else:
+        print(f"Valeur non convertible: {valeur}")
+        break
+
+
+# si la liste n'est pas vide, autrement dit != []
+if valeurs_converties:
+    moyenne = round(sum(valeurs_converties) / len(valeurs_converties), 2)
+    # print(f"Moyenne: {moyenne:.2f}")
+    print(f"Moyenne: {moyenne}")
+
+# %%
