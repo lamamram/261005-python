@@ -19,10 +19,6 @@
 5. écrire le programme principal pour utiliser le package
 """
 
-# import text_analyser.text_cleaner as tc
-from text_analyser.text_cleaner import Cleaner
-from text_analyser.word_counter import Counter
-
 if __name__ == "__main__":
   text = """
 Python est un langage de programmation interprété, 
@@ -43,25 +39,3 @@ Il est conçu pour optimiser la productivité des programmeurs en offrant des ou
 une syntaxe simple à utiliser. 
 """
 
-# tc.Cleaner()
-
-########### techniques d'associations possibles entre classes ###############
-## 1. deux classes indédenpantes
-# avantages: maintenabilité et réutilisabilité max 0 couplage entre les 2
-# inconvénient: du point de vue métier le counter ne foncitonne pas avec un texte non nettoyer
-# => c'est le programme principal qui a la résponsabilité d'associer
-
-# cleaner = Cleaner(text)
-# clean_text = cleaner.clean()
-
-# counter = Counter(clean_text)
-
-## 2. composition : couplage fort
-
-# counter = Counter(text)
-# print(counter.get_occurences())
-
-## 3. aggrégation: couplage faible et injection de dépendances
-
-counter = Counter(Cleaner(text))
-print(counter.get_occurences())
