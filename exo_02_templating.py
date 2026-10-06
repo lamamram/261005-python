@@ -18,9 +18,9 @@ robinet.capacite=((capacite))
 """
 
 injections = {
-    "pression": "500",
-    "section": "30",
-    "debit": "2"
+    "pression": 500,
+    "section": 30,
+    "debit": 2
 }
 
 # %%
