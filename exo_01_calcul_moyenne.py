@@ -30,7 +30,8 @@ for valeur in valeurs:
 
 
 # si la liste n'est pas vide, autrement dit != []
-if valeurs_converties:
+# if valeurs_converties:
+else:
     moyenne = round(sum(valeurs_converties) / len(valeurs_converties), 2)
     # print(f"Moyenne: {moyenne:.2f}")
     print(f"Moyenne: {moyenne}")
