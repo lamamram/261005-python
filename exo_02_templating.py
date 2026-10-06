@@ -24,7 +24,12 @@ injections = {
 }
 
 # %%
+start_index = _template.index("((") + 2
+end_index = _template.index("))")
+key = _template[start_index:end_index]
+print(key)
 
+print(_template.replace("((" + key + "))", str(injections[key])))
 
 # %% ----- portage de la cellule précédente en fonction ----------
 """
