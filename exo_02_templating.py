@@ -31,6 +31,23 @@ print(key)
 
 print(_template.replace("((" + key + "))", str(injections[key])))
 
+# %%
+# exemple avec for
+for k, v in injections.items():
+    _template = _template.replace("((" + k + "))", str(injections[k]))
+
+print(_template)
+
+# %%
+# exemple avec while
+while "((" in _template:
+    start_index = _template.index("((") + 2
+    end_index = _template.index("))")
+    key = _template[start_index:end_index]
+
+    _template = _template.replace("((" + key + "))", str(injections.get(key, "N/A")))
+
+_template
 # %% ----- portage de la cellule précédente en fonction ----------
 """
 technique
