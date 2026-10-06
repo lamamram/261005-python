@@ -19,7 +19,7 @@ valeurs = valeurs.split(",")
 
 valeurs_converties = []
 for valeur in valeurs:
-    valeur = valeur.strip()
+    valeur = valeur.strip() # le trim en python
 #     if valeur.isnumeric() or ( valeur[0] == "-" ):
     # positif             OU  négatif: commence par - ET le reste est numérique
     if valeur.isnumeric() or ( valeur.startswith("-") and valeur[1:].isnumeric() ):
