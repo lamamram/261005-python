@@ -19,6 +19,7 @@
 5. écrire le programme principal pour utiliser le package
 """
 from text_analyser.text_cleaner import Cleaner
+from text_analyser.word_counter import Counter
 
 if __name__ == "__main__":
   text = """
@@ -40,5 +41,8 @@ Il est conçu pour optimiser la productivité des programmeurs en offrant des ou
 une syntaxe simple à utiliser. 
 """
   cl = Cleaner(text)
-  print(cl.clean())
+  # print(cl.clean())
+  counter = Counter(cl)
+  print(counter.text)
 
+  

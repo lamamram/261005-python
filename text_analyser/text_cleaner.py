@@ -15,8 +15,18 @@ class Cleaner:
     def __remove_big_spaces(self):
         self.text = re.sub(r"\s+", " ", self.text)
 
-    def clean(self):
+    def __remove_little_words(self, word_length):
+        self.text = " ".join(
+            list(filter(
+                lambda w: len(w) > word_length, 
+                self.text.split())
+            )
+        )
+
+    def clean(self, word_length=3):
         self.__remove_punctuation()
         self.__remove_crlf()
         self.__remove_big_spaces()
+        self.__remove_little_words(word_length)
+
         return self.text.lower()
