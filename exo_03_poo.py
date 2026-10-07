@@ -43,6 +43,6 @@ une syntaxe simple à utiliser.
   cl = Cleaner(text)
   # print(cl.clean())
   counter = Counter(cl)
-  print(counter.text)
+  print(counter.count())
 
   
