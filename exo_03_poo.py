@@ -21,6 +21,13 @@
 from text_analyser.text_cleaner import Cleaner
 from text_analyser.word_counter import Counter
 
+# sys.argv : permet de demander des paramètre dans le script depuis la cli
+import sys
+
+word_length = int(sys.argv[1]) if len(sys.argv) > 1 else 3
+nb_crop = int(sys.argv[2]) if len(sys.argv) > 2 else 5
+
+
 if __name__ == "__main__":
   text = """
 Python est un langage de programmation interprété, 
@@ -42,7 +49,7 @@ une syntaxe simple à utiliser.
 """
   cl = Cleaner(text)
   # print(cl.clean())
-  counter = Counter(cl)
-  print(counter.count())
+  counter = Counter(cl, word_length)
+  print(counter.count(nb_crop))
 
   

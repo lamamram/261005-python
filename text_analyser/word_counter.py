@@ -7,7 +7,7 @@ class Counter:
     def __init__(self, cleaner: Cleaner, word_length: int=3):
         self.text = cleaner.clean(word_length)
 
-    def count(self) -> dict:
+    def count(self, nb_crop: int=5) -> dict:
         occurences = {}
         # pour chaque mot du texte (nettoyé)
         for word in self.text.split():
@@ -17,5 +17,11 @@ class Counter:
         # soit le mot n'est pas dans le dictionnaire alors je créé la clé avec l'occurence 1
           else:
               occurences[word] = 1
-        return occurences 
+
+        # trier par occurences
+        return dict(sorted(
+            occurences.items(), 
+            key=lambda t: t[1],
+            reverse=True
+        )[:nb_crop])
 
