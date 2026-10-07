@@ -19,6 +19,10 @@ class Counter:
               occurences[word] = 1
 
         # trier par occurences
+        # 1. transformer le dict en liste de tuples => .items
+        # 2. trier avec une lambda pour trier sur les occurences décroissantes
+        # 3. croper la liste de tuples [:nb_crop]
+        # 4. on remet en dict
         return dict(sorted(
             occurences.items(), 
             key=lambda t: t[1],
