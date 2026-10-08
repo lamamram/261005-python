@@ -57,3 +57,5 @@ except (requests.ConnectionError, requests.HTTPError, ValueError) as e:
 
 
 
+
+# %%
