@@ -27,6 +27,8 @@ modus operandi: faire ceci en n'ouvrant le csv en lecture qu'une seule fois
 
 # %% ------------------ téléchargement du fichier zip ------------------
 
+from unittest import __dir__
+
 import requests
 import os
 
@@ -63,13 +65,27 @@ if not os.path.exists(f"./{archive_name}"):
 
 
 
-# %% -------------- décompression du zip ----------------
+# %% -------------- décompression du zip + manip de système de fichier ----------------
 
 from zipfile import ZipFile
+from pathlib import Path
 
+# utilisations des objets chemins portable
+# dossier parent, fichier, extension
+# p_data.absolute().parent, p_data.stem, p_data.suffix
+# ROOT_DIR = Path(__file__).absolute().parent
 
-with ZipFile(f"./{archive_name}", mode="r") as z:
-   csv_name = z.namelist()[0]
-   z.extract(csv_name)
+p_data = Path("./data")
+if not p_data.exists():
+   # les objet Path sont complètement compatibles avec os
+   os.mkdir(p_data)
+
+if not (p_data / "dns.csv").exists():
+   with ZipFile(f"./{archive_name}", mode="r") as z:
+      csv_name = z.namelist()[0]
+      z.extract(csv_name, path=p_data)
+
+   # l'opérateur '/' a été redéfini pour une conaténation entre objet Path ou entre Path <-> str
+   os.rename(p_data / csv_name, p_data / "dns.csv")
 
 # %%
