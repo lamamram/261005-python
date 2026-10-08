@@ -27,13 +27,12 @@ modus operandi: faire ceci en n'ouvrant le csv en lecture qu'une seule fois
 
 # %% ------------------ téléchargement du fichier zip ------------------
 
-from unittest import __dir__
-
 import requests
 import os
 
 url = "https://www.afnic.fr/wp-media/ftp/documentsOpenData/202503_OPENDATA_A-NomsDeDomaineEnPointFr.zip"
 archive_name = url.split("/")[-1]
+dns_name = "dns.csv"
 
 # GET, POST,  PUT,                    PATCH,    DELETE    , HEAD:                 : ce sont les VERBES ou METHODES HTTP
 # lire, créer, modif complète, modif partielle, supprimer , réponse sans headers
@@ -76,16 +75,58 @@ from pathlib import Path
 # ROOT_DIR = Path(__file__).absolute().parent
 
 p_data = Path("./data")
+p_csv = p_data / dns_name
+
+
 if not p_data.exists():
    # les objet Path sont complètement compatibles avec os
    os.mkdir(p_data)
 
-if not (p_data / "dns.csv").exists():
+if not p_csv.exists():
    with ZipFile(f"./{archive_name}", mode="r") as z:
       csv_name = z.namelist()[0]
       z.extract(csv_name, path=p_data)
 
    # l'opérateur '/' a été redéfini pour une concaténation entre objet Path ou entre Path <-> str
-   os.rename(p_data / csv_name, p_data / "dns.csv")
+   os.rename(p_data / csv_name, p_csv)
+
+# %% ------------ découper un gros csv -----------------------
+"""
+dans la boucle for:
+- accumuler 100k lignes
+- quand on sait qu'on est sur la 100kème ligne et aussi la 200kème ligne
+  + on créé un fichier de type f"dns_{num_ligne}.csv" dans lequel on écrit
+  + le header et 100k lignes
+- après le 2 paquets on s'arrête
+
+"""
+
+import csv
+
+encoding = "utf-8"
+delimiter = ";"
+slice_size = 10**5
+nb_slice = 2
+
+def write_slice(num_line, header, rows: list):
+   with open(p_data / f"dns_{num_line}.csv", mode="w", encoding=encoding) as f:
+      writer = csv.writer(f, delimiter=delimiter, lineterminator="\n")
+      writer.writerow(header)
+      writer.writerows(rows)
+      rows.clear() # vide rows qui est aussi le rows global
+      # rows = [] # mauvais car ce rows change d'id !!! donc ne vide pas le rows global
+
+
+rows = []
+
+with open(p_csv, mode="r", encoding=encoding) as f:
+   reader = csv.reader(f, delimiter=delimiter)
+   header = next(reader)
+   for num_line, row in enumerate(reader, start=1):
+      if num_line > nb_slice * slice_size: break
+      rows.append(row)
+      if not num_line % slice_size:
+         write_slice(num_line, header, rows)
+
 
 # %%
