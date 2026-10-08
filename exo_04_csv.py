@@ -65,4 +65,11 @@ if not os.path.exists(f"./{archive_name}"):
 
 # %% -------------- décompression du zip ----------------
 
+from zipfile import ZipFile
 
+
+with ZipFile(f"./{archive_name}", mode="r") as z:
+   csv_name = z.namelist()[0]
+   z.extract(csv_name)
+
+# %%
