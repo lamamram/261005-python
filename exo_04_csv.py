@@ -94,7 +94,7 @@ if not p_csv.exists():
 """
 dans la boucle for:
 - accumuler 100k lignes
-- quand on sait qu'on est sur la 100kème ligne et aussi la 200kème ligne
+- quand on sait qu'on est sur la 100kème ligne et aussi la 200kème ligne (multiple de 100k)
   + on créé un fichier de type f"dns_{num_ligne}.csv" dans lequel on écrit
   + le header et 100k lignes
 - après le 2 paquets on s'arrête
@@ -129,4 +129,39 @@ with open(p_csv, mode="r", encoding=encoding) as f:
          write_slice(num_line, header, rows)
 
 
+# %% ------------------------ idem avec pandas ------------------------
+
+# pip install pandas
+import pandas as pd
+
+dns_df = pd.read_csv(
+   url, sep=delimiter, encoding=encoding
+)
+dns_df
+
+# %%
+
+dns_df.to_csv(
+   "dns.zip",
+   sep=';',
+   encoding=encoding,
+   index=False
+)
+
+# %%
+"""
+je veux voir les pays qui hébergent du .fr dans l'ordre croissant du compte
+"""
+
+dns_subset_df = pd.read_csv(
+   "dns.zip",
+   sep=delimiter,
+   encoding=encoding,
+   usecols=["Nom de domaine", "Pays BE"],
+   # nrows=10**6
+)
+
+gb = dns_subset_df.groupby(by="Pays BE")
+count_countruies_series = gb["Nom de domaine"].count().sort_values(ascending=False)
+count_countruies_series
 # %%
