@@ -18,8 +18,12 @@
 
 5. écrire le programme principal pour utiliser le package
 """
-from text_analyser.text_cleaner import Cleaner
-from text_analyser.word_counter import Counter
+
+# from text_analyser.text_cleaner import Cleaner
+# from text_analyser.word_counter import Counter
+
+# avec import depuis le package (__init__.py)
+from text_analyser import Cleaner, Counter
 
 # sys.argv : permet de demander des paramètre dans le script depuis la cli
 import sys
