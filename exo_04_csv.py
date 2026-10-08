@@ -85,7 +85,7 @@ if not (p_data / "dns.csv").exists():
       csv_name = z.namelist()[0]
       z.extract(csv_name, path=p_data)
 
-   # l'opérateur '/' a été redéfini pour une conaténation entre objet Path ou entre Path <-> str
+   # l'opérateur '/' a été redéfini pour une concaténation entre objet Path ou entre Path <-> str
    os.rename(p_data / csv_name, p_data / "dns.csv")
 
 # %%
