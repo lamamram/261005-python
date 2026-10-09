@@ -13,4 +13,4 @@ dns_*.csv
 2025*.csv
 data/
 *.ui
-Ui_*.py
+gui_MainWindow.py
