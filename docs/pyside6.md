@@ -54,7 +54,7 @@ start pyside6-designer
 pyside6-uic gui_analyser.ui -o gui_MainWindow.py
 ```
 
-## dans la classe Starter_init pour dynamiser le widget
+## dans le module gui_starter_init pour dynamiser le widget
 
 1. ajouter la classe `Ui_MainWindow` 
    * dans la classe "fenêtre" `MyWindow`
@@ -66,10 +66,10 @@ pyside6-uic gui_analyser.ui -o gui_MainWindow.py
 
 3. ajouter une gestion d'évènement sur le bouton
    * utiliser l'attribut `okBtn` hérité
-   * *connecter* l'évènenement `cliked` de cet l'attribut
-   * avec une méthode à écrire `on_ok_cliked` dans la classe `MyWindow`
+   * *connecter* l'évènenement `clicked` de cet l'attribut
+   * avec une méthode à écrire `on_ok_clicked` dans la classe `MyWindow`
    * cette méthode va trouver le contenu du `TextEdit`
    * instancier le `Counter`
    * ajouter les résultats dans `listWidget`
 
-4. lancer l'application `Starter.py` avec python
+4. lancer l'application `gui_app.py` avec python
