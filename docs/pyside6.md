@@ -42,7 +42,7 @@ start pyside6-designer
   + `SpinBox`: `objectName: signWords` dans `QObject` à droite
   + `SpinBox`: `minimum: 1` dans `QSpinBox` à droite
   + `SpinBox`: `maximum: 10` dans `QSpinBox` à droite
-  + `SpinBox`: `value: 5` dans `QSpinBox` à droite
+  + `SpinBox`: `value: 3` dans `QSpinBox` à droite
 
 * sauvegarder: `Ctrl + s` analyzer.ui dans le dossier gui
 
@@ -51,7 +51,7 @@ start pyside6-designer
 ```powershell
 # exécuter: pyside6-uic analyzer.ui et voir le nom de la classe
 # générée: Ui_MainWindow
-pyside6-uic layout.ui -o Ui_MainWindow.py
+pyside6-uic gui_analyser.ui -o gui_MainWindow.py
 ```
 
 ## dans la classe Starter_init pour dynamiser le widget
