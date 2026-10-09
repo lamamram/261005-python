@@ -14,3 +14,4 @@ dns_*.csv
 data/
 *.ui
 gui_MainWindow.py
+#.env
